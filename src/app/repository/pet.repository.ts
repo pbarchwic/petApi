@@ -16,4 +16,6 @@ export class PetRepository {
       )
       .pipe(tap((response) => response));
   }
+
+  public addPet() {}
 }

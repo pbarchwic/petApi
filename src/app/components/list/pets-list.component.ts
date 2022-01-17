@@ -18,12 +18,9 @@ export class PetsListComponent implements OnInit {
   }
 
   public getPets(): void {
-    this.repository.getPetDetails().subscribe(
-      (response: PetDetails[]) => {
-        this.pets = response;
-        console.log(this.pets);
-      },
-      () => {}
-    );
+    this.repository.getPetDetails().subscribe((response: PetDetails[]) => {
+      this.pets = response;
+      console.log(this.pets);
+    });
   }
 }

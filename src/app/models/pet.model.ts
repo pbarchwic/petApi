@@ -14,11 +14,3 @@ export interface PetDetails {
   ];
   status: string;
 }
-
-// export interface PetResponse {
-//   pets: PetDetails[];
-// }
-
-// export interface Response<T> {
-//   result: T;
-// }

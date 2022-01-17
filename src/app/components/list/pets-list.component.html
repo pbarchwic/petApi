@@ -1,1 +1,11 @@
-Lista zwierzaków
+<div class="petsList">
+
+    <h2>Pets List</h2>
+    <button>Refresh</button>
+    <ol>
+        <li *ngFor="let pet of pets">
+            <span>{{pet.name}}</span>
+        </li>
+    </ol>
+</div>
+

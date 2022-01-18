@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PetDetails } from 'src/app/models';
 import { PetRepository } from 'src/app/repository';
 
@@ -8,6 +8,7 @@ import { PetRepository } from 'src/app/repository';
   styleUrls: ['./pets-list.component.scss'],
 })
 export class PetsListComponent implements OnInit {
+  // @Input refresh
   public pets: PetDetails[] = [];
 
   constructor(private readonly repository: PetRepository) {}

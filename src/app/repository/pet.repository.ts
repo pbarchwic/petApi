@@ -17,5 +17,7 @@ export class PetRepository {
       .pipe(tap((response) => response));
   }
 
-  public addPet() {}
+  public addPet(pet: PetDetails): Observable<void> {
+    return this.http.post<void>('https://petstore.swagger.io/v2/pet', pet);
+  }
 }

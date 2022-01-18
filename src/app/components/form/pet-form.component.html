@@ -1,1 +1,8 @@
-<input type="text">
+<form (ngSubmit)="onSubmit()" [formGroup]="petForm" >
+    <input type="text" name="petName" placeholder="pet name" formControlName="petName">
+    <button type="submit" [disabled]="petForm.invalid">Send</button>
+    <div *ngIf = "petForm.invalid && petForm.value.petName !== ''" >
+        jest jakiś problem
+
+    </div>
+</form>

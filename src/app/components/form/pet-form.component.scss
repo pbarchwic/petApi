@@ -1,3 +1,35 @@
+$errorColor: rgb(255, 104, 58);
+
 .form {
   width: 500px;
+
+  input {
+    border-radius: 4px;
+
+    &.invalid {
+      border: 4px solid $errorColor;
+    }
+  }
+
+  &-label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  &-sendBtn {
+    margin-left: 10px;
+  }
+
+  &-infoBox {
+    margin-top: 20px;
+  }
+
+  &-invalid,
+  &-error {
+    color: $errorColor;
+  }
+
+  &-complete {
+    color: rgb(94, 156, 0);
+  }
 }

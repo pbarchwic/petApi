@@ -17,6 +17,9 @@ import { ListRefresherService } from 'src/app/services';
   styleUrls: ['./pet-form.component.scss'],
 })
 export class PetFormComponent {
+  public isSending = false;
+  public isError = false;
+  public isCompleted = false;
   public pet: PetDetails;
   public petForm: FormGroup;
   public forbiddenPetArray: string[] = [];
@@ -52,32 +55,31 @@ export class PetFormComponent {
   }
 
   public addPet(pet: PetDetails): void {
-    // this.isLoading = true;
-    // this.isError = false;
+    this.isSending = true;
     this.petForm.disable();
 
-    this.repository.addPet(pet).subscribe(
-      () => {
+    this.repository.addPet(pet).subscribe({
+      next: () => {
         this.petForm.enable();
-        this.listRefresher.isRefresh$.next(true);
-        // this.isLoading = false;
+        this.forbiddenPetArray.push(pet.name);
+        this.isSending = false;
       },
-      () => {
-        // this.error = error instanceof HttpErrorResponse && error.status;
-        // this.isError = true;
-        // this.isLoading = false;
+      error: () => {
+        this.isError = true;
+        this.isSending = false;
         this.petForm.enable();
       },
-      () => {
+      complete: () => {
         this.petForm.enable();
-      }
-    );
+        this.isCompleted = true;
+        this.listRefresher.stringRefresh$.next(pet.name);
+      },
+    });
   }
 
   public onSubmit() {
     this.pet.name = this.petForm.value.petName;
     this.addPet(this.pet);
-    this.forbiddenPetArray.push(this.petForm.value.petName);
     this.petForm.reset({ petName: '' });
   }
 

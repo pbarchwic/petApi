@@ -1,0 +1,21 @@
+.petsList {
+  &-header {
+    display: flex;
+    align-items: center;
+
+    button {
+      border-radius: 4px;
+      margin-left: 15px;
+      height: 25px;
+    }
+  }
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      width: 200px;
+    }
+  }
+}

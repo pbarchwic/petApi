@@ -18,18 +18,29 @@ export class PetsListComponent implements OnInit {
 
   ngOnInit() {
     this.getPets();
-    // console.log(this.pets);
-    this.listRefresher.isRefresh$.subscribe((value) => {
-      if (value) {
-        this.getPets();
-      }
+    this.listRefresher.stringRefresh$.subscribe((name) => {
+      this.pets.push({
+        id: 0,
+        category: {
+          id: 0,
+          name: 'string',
+        },
+        name: name,
+        photoUrls: ['string'],
+        tags: [
+          {
+            id: 0,
+            name: 'string',
+          },
+        ],
+        status: 'available',
+      });
     });
   }
 
   public getPets(): void {
     this.repository.getPetDetails().subscribe((response: PetDetails[]) => {
       this.pets = response;
-      // console.log(this.pets);
     });
   }
 

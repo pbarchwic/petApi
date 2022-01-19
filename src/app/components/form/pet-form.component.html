@@ -1,13 +1,25 @@
 <div class="form">
+    
     <form (ngSubmit)="onSubmit()" [formGroup]="petForm" >
-        <input type="text" name="petName" placeholder="pet name" formControlName="petName">
+        <label class="form-label">Pet name:</label>
+        <input 
+            type="text" 
+            name="petName" 
+            placeholder="Pet name" 
+            formControlName="petName"
+            (focus)="isCompleted = false" 
+            [ngClass]="{ 'invalid': petForm.invalid && petForm.value.petName !== ''}"
+          />
+
         <button class = "form-sendBtn" type="submit" [disabled]="petForm.invalid">Send</button>
     </form>
 
     <div class = "form-infoBox">
-        <span class = "invalidInfo" *ngIf = "petForm.invalid && petForm.value.petName !== ''" >
-            You have already added the animal name {{petForm.value.petName}}
+        <span class = "form-invalid" *ngIf = "petForm.invalid && petForm.value.petName !== ''" >
+            You have already added the animal name <strong>{{petForm.value.petName}}</strong>
         </span>
-        <span class="sending"> Sending</span>
+        <span class="form-sending" *ngIf="isSending">Sending...</span>
+        <span class="form-error" *ngIf="isError">Ops... Somethings goes wrong. Please try again.</span>
+        <span class="form-complete" *ngIf="isCompleted">Sending successful completed</span>
     </div>
 </div>

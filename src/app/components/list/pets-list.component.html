@@ -1,7 +1,12 @@
 <div class="petsList">
 
-    <h2>Pets List</h2>
-    <button (click)="refreshList()">Refresh</button>
+    <div class="petsList-header">
+        <h2>
+            Pets List 
+        </h2>
+        <button (click)="refreshList()">Refresh</button>
+    </div>
+
     <ol>
         <li *ngFor="let pet of pets">
             <span>{{pet.name}}</span>

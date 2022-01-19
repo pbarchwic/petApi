@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { PetDetails } from 'src/app/models';
 import { PetRepository } from 'src/app/repository';
+import { ListRefresherService } from 'src/app/services';
 
 @Component({
   selector: 'app-pet-form',
@@ -22,7 +23,8 @@ export class PetFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private readonly repository: PetRepository
+    private readonly repository: PetRepository,
+    private listRefresher: ListRefresherService
   ) {
     this.pet = {
       id: 0,
@@ -56,7 +58,8 @@ export class PetFormComponent {
 
     this.repository.addPet(pet).subscribe(
       () => {
-        this.petForm.enable;
+        this.petForm.enable();
+        this.listRefresher.isRefresh$.next(true);
         // this.isLoading = false;
       },
       () => {

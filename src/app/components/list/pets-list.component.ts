@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PetDetails } from 'src/app/models';
 import { PetRepository } from 'src/app/repository';
+import { ListRefresherService } from 'src/app/services';
 
 @Component({
   selector: 'app-pets-list',
@@ -8,20 +9,31 @@ import { PetRepository } from 'src/app/repository';
   styleUrls: ['./pets-list.component.scss'],
 })
 export class PetsListComponent implements OnInit {
-  // @Input refresh
   public pets: PetDetails[] = [];
-
-  constructor(private readonly repository: PetRepository) {}
+  public refreshNeeded = false;
+  constructor(
+    private readonly repository: PetRepository,
+    private listRefresher: ListRefresherService
+  ) {}
 
   ngOnInit() {
     this.getPets();
-    console.log(this.pets);
+    // console.log(this.pets);
+    this.listRefresher.isRefresh$.subscribe((value) => {
+      if (value) {
+        this.getPets();
+      }
+    });
   }
 
   public getPets(): void {
     this.repository.getPetDetails().subscribe((response: PetDetails[]) => {
       this.pets = response;
-      console.log(this.pets);
+      // console.log(this.pets);
     });
+  }
+
+  public refreshList() {
+    this.getPets();
   }
 }

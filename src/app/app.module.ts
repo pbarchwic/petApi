@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 import * as Components from './components/index';
 import * as Repositories from './repository/index';
+import * as Services from './services/index';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import * as Repositories from './repository/index';
     AppComponent,
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule],
-  providers: [Repositories.PetRepository],
+  providers: [Repositories.PetRepository, Services.ListRefresherService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

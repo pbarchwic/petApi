@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { PetDetails } from 'src/app/models';
+import { petObject } from 'src/app/objects/petObj';
 import { PetRepository } from 'src/app/repository';
 import { ListRefresherService } from 'src/app/services';
 
@@ -20,7 +21,7 @@ export class PetFormComponent {
   public isSending = false;
   public isError = false;
   public isCompleted = false;
-  public pet: PetDetails;
+  public pet: PetDetails = petObject;
   public petForm: FormGroup;
   public forbiddenPetArray: string[] = [];
 
@@ -29,23 +30,6 @@ export class PetFormComponent {
     private readonly repository: PetRepository,
     private listRefresher: ListRefresherService
   ) {
-    this.pet = {
-      id: 0,
-      category: {
-        id: 0,
-        name: 'string',
-      },
-      name: '',
-      photoUrls: ['string'],
-      tags: [
-        {
-          id: 0,
-          name: 'string',
-        },
-      ],
-      status: 'available',
-    };
-
     this.petForm = this.formBuilder.group({
       petName: new FormControl('', [
         Validators.required,

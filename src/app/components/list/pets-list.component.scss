@@ -12,7 +12,9 @@
 
   ol {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    height: 1500px;
 
     li {
       width: 200px;
